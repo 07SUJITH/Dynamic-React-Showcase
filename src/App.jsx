@@ -1,8 +1,24 @@
+import { useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+
+import Preloader from './components/preloader/Preloader'
+import Home from './pages/home'
+
 function App() {
+    const [loadingComplete, setLoadingComplete] = useState(false)
+
+    const handleLoadingComplete = () => {
+        setLoadingComplete(true)
+    }
+
+    if (!loadingComplete) {
+        return <Preloader onComplete={handleLoadingComplete} />
+    }
+
     return (
-        <div className=" flex items-center justify-center h-screen">
-            <h1 className="text-3xl text-red-400">App demo</h1>
-        </div>
+        <Routes>
+            <Route path="/" element={<Home />} />
+        </Routes>
     )
 }
 
